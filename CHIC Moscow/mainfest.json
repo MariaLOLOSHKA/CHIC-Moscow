@@ -1,0 +1,8 @@
+{
+  "name": "CHIC_Moscow",
+  "short_name": "CHIC",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#000000",
+}

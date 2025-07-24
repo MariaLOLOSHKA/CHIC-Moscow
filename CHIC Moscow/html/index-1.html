@@ -1,0 +1,563 @@
+<HTML>
+<HEAD>
+	<TITLE> CHIC Moscow Guide </TITLE>
+	<style>
+		
+		@import url('https://fonts.cdnfonts.com/css/league-gothic');
+		@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;400&display=swap');
+		body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #333;
+			min-height: 100vh;
+        }
+		
+		.search-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+            padding: 0 20px;
+			positon: relative;
+        }
+		
+		.search-bar {
+            width: 600px;
+            max-width: 80%;
+            height: 50px;
+            background: #FFFFFF;
+            border-radius: 25px;
+            display: flex;
+            align-items: center;
+            padding: 0 20px;
+            box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.1);
+			border: 1px solid rgba(198, 132, 166, 0.2);
+			gap: 10px;
+		}
+		
+		.filter-icon {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-end;
+            cursor: pointer;
+            padding: 5px;
+        }
+		
+		.filter-icon span {
+            display: block;
+            height: 2px;
+            background-color: #000;
+            margin: 2px 0;
+        }
+		
+		.filter-icon span:nth-child(1) { width: 16px; }
+        .filter-icon span:nth-child(2) { width: 12px; }
+        .filter-icon span:nth-child(3) { width: 8px; }
+		
+		.filter-icon:hover span {
+            background-color: #333;
+        }
+		
+		
+		.search-bar:focus-within {
+            box-shadow: inset 0 2px 12px rgba(0, 0, 0, 0.15);
+            border-color: rgba(198, 132, 166, 0.4);
+        }
+		
+		.search-input {
+            flex: 1;
+            border: none;
+            outline: none;
+            font-family: 'Oswald', sans-serif;
+            font-size: 16px;
+            padding: 0 15px;
+            background: transparent;
+        }
+
+        .search-icon {
+            width: 20px;
+            height: 20px;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cline x1='21' y1='21' x2='16.65' y2='16.65'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: center;
+            opacity: 0.7;
+            cursor: pointer;
+        }
+		
+		.search-icon:hover {
+            opacity: 1;
+        }
+		
+		.bg-image {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 508px;
+            height: 100vh;
+            background-image: url('images/al.png');
+            background-size: cover;
+            background-position: left center;
+            background-repeat: no-repeat;
+            z-index: -1;
+			opacity: 0.8;
+        }
+		
+		.top-btn {
+            font-family: 'Oswald', sans-serif;
+            font-size: 16px;
+            font-weight: 300;
+            color: #C8891B;
+            background-color: white;
+            border-radius: 40px;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+            position: fixed;
+            z-index: 1001;
+            padding: 8px 16px;
+            white-space: nowrap;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            height: 32px;
+        }
+		
+		.menu-btn {
+            right: 110px;
+			top: 26px;
+            width: 32px;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+		
+		.menu-btn span {
+            display: block;
+            height: 2px;
+            background-color: #C8891B;
+            margin: 3px 0;
+            transition: all 0.3s ease;
+        }
+		
+		.menu-btn span:nth-child(1),
+        .menu-btn span:nth-child(3) {
+            width: 20px;
+        }
+		
+		.menu-btn span:nth-child(2) {
+            width: 16px;
+        }
+		
+		.register-btn {
+            right: 20px;
+			top: 20px;
+        }
+    
+
+		.side-panel {
+		transition: transform 0.3s ease-in-out;
+		transform: translateX(-100%);
+		}
+		
+		.side-panel.panel-open {
+		transform: translateX(0);
+		}
+
+		.top-btn:hover {
+            background-color: #f5f5f5;
+        }
+
+		
+		.header {
+            background-color: rgba(198, 132, 166, 0.7);
+            width: 100%;
+            height: 244px;
+            position: relative;
+            margin: 0;
+            padding: 0;
+			backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
+        }
+		
+		
+		.logo {
+			font-family: 'League Gothic', sans-serif;
+            font-size: 136px;
+            color: #FFFFFF;
+            font-weight: normal;
+			font-style: normal;
+            position: absolute;
+            left: 50px;
+            top: 50px;
+            margin: 0;
+            padding: 0;
+			line-height: 0.9;
+            line-height: 1;
+		}
+		
+		.subtitle {
+			font-family: 'Oswald', sans-seri
+			font-size: 28px;
+            font-weight: 300;
+            color: #FFFFFF;
+            position: absolute;
+            left: 50px;
+            top: 170px;
+            margin: 0;
+            padding: 0;
+            white-space: nowrap;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+        }
+		
+		.content {
+            margin-left: 508px;
+            padding: 20px;
+        }
+		
+		.actual-section {
+			font-familt: 'Oswald', sans-serif;
+			font-size: 20px;
+			font-weight: 300;
+			color: #FFFFFF;
+			margin-top: 20px;
+			margin-left: 50px;
+			text-transform: uppercase;
+			letter-spacing: 1px;
+			text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+	    }
+		
+		.filter-actions {
+		  display: flex;
+		  justify-content: space-between;
+		  margin-top: 20px;
+		}
+
+		.filter-actions button {
+		  padding: 8px 16px;
+		  border-radius: 20px;
+		  border: none;
+		  cursor: pointer;
+		}
+
+		#applyFilters {
+		  background: #C684A6;
+		  color: white;
+		}
+
+		#resetFilters {
+		  background: #f5f5f5;
+		}
+		
+		.side-panel {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 300px;
+		height: 100vh;
+		background: rgba(255, 255, 255, 0.95);
+		backdrop-filter: blur(10px);
+		box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+		transform: translateX(-100%);
+		transition: transform 0.3s ease-in-out;
+		z-index: 1000;
+		overflow-y: auto;
+		}
+
+		.side-panel.panel-open {
+			transform: translateX(0);
+		}
+
+		.panel-content {
+			padding: 20px;
+		}
+
+		.side-panel h3 {
+			font-family: 'Oswald', sans-serif;
+			color: #C684A6;
+			font-size: 24px;
+			margin-bottom: 20px;
+		}
+
+		.side-panel ul {
+			list-style: none;
+			padding: 0;
+		}
+
+		.side-panel li {
+			margin-bottom: 15px;
+		}
+
+		.side-panel a {
+			text-decoration: none;
+			color: #333;
+			font-family: 'Oswald', sans-serif;
+			font-size: 18px;
+			transition: color 0.2s;
+		}
+
+		.side-panel a:hover {
+			color: #C684A6;
+		}
+
+		.overlay {
+			position: fixed;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: rgba(0, 0, 0, 0.5);
+			z-index: 999;
+			display: none;
+		}
+
+		.overlay.active {
+			display: block;
+		}
+		
+		.menu-btn.active span:nth-child(1) {
+		transform: rotate(45deg) translate(5px, 5px);
+		}
+		.menu-btn.active span:nth-child(2) {
+			opacity: 0;
+		}
+		.menu-btn.active span:nth-child(3) {
+			transform: rotate(-45deg) translate(5px, -5px);
+		}
+		
+	</style>
+</HEAD>
+
+<body>
+
+	<div class="bg-image"></div>
+	
+	<button class="top-btn menu-btn" id="panelToggle">
+		<span></span>
+        <span></span>
+        <span></span>
+    </button>
+    
+    <a href="register.html" target="_blank" class="top-btn register-btn">SIGN IN</a>
+	<div class="side-panel" id="sidePanel">
+		<div class="panel-content">
+			<h3>Меню</h3>
+			<ul>
+				<li><a href="#">Главная</a></li>
+				<li><a href="html/map.html">Карта заведений</a></li>
+				<li><a href="#">Отзывы</a></li>
+				<li><a href="#">Контакты</a></li>
+			</ul>
+		</div>
+	</div>
+<div class="overlay" id="overlay"></div>
+	<div class="header">
+		<div class="logo">CHIC Moscow</div>
+		<div class="subtitle">Гид по самым вкусным местам Москвы</div>
+	</div>
+	<div class="search-container">
+        <div class="search-bar">
+            <input type="text" class="search-input" placeholder="Найти заведения...">
+            <div class="search-icon"></div>
+			<div class="filter-icon">
+				<span></span>
+                <span></span>
+                <span></span>
+			</div>
+		</div>
+	</div>
+	<div class="actual-section" style="
+    font-family: 'Oswald', sans-serif;
+    font-size: 20px;
+    font-weight: 300;
+    color: #FFFFFF;
+    margin-top: 20px;
+    margin-left: 170px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+	">Актуальное</div>
+	<div class="establishments-container" style="
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin: 30px 50px;
+">
+		<!-- Bro&n -->
+		<div class="establishment-card" style="
+			position: relative;
+			width: 300px;
+			height: 200px;
+			border-radius: 12px;
+			overflow: hidden;
+			box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+			transition: transform 0.3s ease;
+		">
+			<a href="https://bronrest.ru/" target="_blank" style="text-decoration: none;">
+				<div class="establishment-image" style="
+					width: 100%;
+					height: 100%;
+					background-image: url('images/bron.jpg');
+					background-size: cover;
+					background-position: center;
+					position: relative;
+				">
+					<div class="image-overlay" style="
+						position: absolute;
+						top: 0;
+						left: 0;
+						width: 100%;
+						height: 100%;
+						background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 50%, rgba(255, 255, 255, 0) 100%);
+					"></div>
+					<div class="establishment-name" style="
+						position: absolute;
+						bottom: 15px;
+						left: 15px;
+						color: white;
+						font-family: 'Oswald', sans-serif;
+						font-size: 24px;
+						font-weight: 400;
+						text-shadow: 1px 1px 2px rgba(255,255,255,0.5);
+					">Bro&n</div>
+				</div>
+			</a>
+		</div>
+
+		<!-- Кофемания -->
+		<div class="establishment-card" style="
+			position: relative;
+			width: 300px;
+			height: 200px;
+			border-radius: 12px;
+			overflow: hidden;
+			box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+			transition: transform 0.3s ease;
+		">
+			<a href="https://coffeemania.ru/" target="_blank" style="text-decoration: none;">
+				<div class="establishment-image" style="
+					width: 100%;
+					height: 100%;
+					background-image: url('images/coffeemania.jpg');
+					background-size: cover;
+					background-position: center;
+					position: relative;
+				">
+					<div class="image-overlay" style="
+						position: absolute;
+						top: 0;
+						left: 0;
+						width: 100%;
+						height: 100%;
+						background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 50%, rgba(255,255,255,0) 100%);
+					"></div>
+					<div class="establishment-name" style="
+						position: absolute;
+						bottom: 15px;
+						left: 15px;
+						color: white;
+						font-family: 'Oswald', sans-serif;
+						font-size: 24px;
+						font-weight: 400;
+						text-shadow: 1px 1px 2px rgba(255,255,255,0.5);
+					">Кофемания</div>
+				</div>
+			</a>
+		</div>
+
+		<!-- Мария Санта -->
+		<div class="establishment-card" style="
+			position: relative;
+			width: 300px;
+			height: 200px;
+			border-radius: 12px;
+			overflow: hidden;
+			box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+			transition: transform 0.3s ease;
+		">
+			<a href="https://cafesanta.ru/rus/" target="_blank" style="text-decoration: none;">
+				<div class="establishment-image" style="
+					width: 100%;
+					height: 100%;
+					background-image: url('images/santa.jpg');
+					background-size: cover;
+					background-position: center;
+					position: relative;
+				">
+					<div class="image-overlay" style="
+						position: absolute;
+						top: 0;
+						left: 0;
+						width: 100%;
+						height: 100%;
+						background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 50%, rgba(255,255,255,0) 100%);
+					"></div>
+					<div class="establishment-name" style="
+						position: absolute;
+						bottom: 15px;
+						left: 15px;
+						color: white;
+						font-family: 'Oswald', sans-serif;
+						font-size: 24px;
+						font-weight: 400;
+						text-shadow: 1px 1px 2px rgba(255,255,255,0.5);
+					">Мария Санта</div>
+				</div>
+			</a>
+		</div>
+
+		<!-- DIDI -->
+		<div class="establishment-card" style="
+			position: relative;
+			width: 300px;
+			height: 200px;
+			border-radius: 12px;
+			overflow: hidden;
+			box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+			transition: transform 0.3s ease;
+		">
+			<a href="https://tomesto.ru/moskva/places/didi?utm_campaign=msk_restorani_y_poisk&utm_content=52403848358%7Cret%7C52403848358%7Ccid%7C53234282%7Cgid%7C5466970713%7Caid%7C16294831023%7Cadp%7Cno%7Cpos%7Cpremium1%7Csrc%7Csearch_none%7Cdvc%7Cdesktop%7Creg%7CСочи%7C16294831023&utm_medium=cpc&utm_source=yandex&utm_term=didi%20ресторан&yclid=8589100378531823615" target="_blank" style="text-decoration: none;">
+				<div class="establishment-image" style="
+					width: 100%;
+					height: 100%;
+					background-image: url('images/DIDI.png');
+					background-size: cover;
+					background-position: center;
+					position: relative;
+				">
+					<div class="image-overlay" style="
+						position: absolute;
+						top: 0;
+						left: 0;
+						width: 100%;
+						height: 100%;
+						background: linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 50%, rgba(255,255,255,0) 100%);
+					"></div>
+					<div class="establishment-name" style="
+						position: absolute;
+						bottom: 15px;
+						left: 15px;
+						color: white;
+						font-family: 'Oswald', sans-serif;
+						font-size: 24px;
+						font-weight: 400;
+						text-shadow: 1px 1px 2px rgba(255,255,255,0.5);
+					">DIDI</div>
+				</div>
+			</a>
+		</div>
+	</div>
+	<script src="js/filters.js"></script>
+	<script src="js/menu.js"></script>
+</body>
+
+</html>
+	
+
